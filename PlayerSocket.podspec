@@ -31,7 +31,7 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '9.0'
 
   s.source_files = 'PlayerSocket/Classes/**/*'
-  
+  s.version          = '0.1.1'
   # s.resource_bundles = {
   #   'PlayerSocket' => ['PlayerSocket/Assets/*.png']
   # }
