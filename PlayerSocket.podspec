@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/banwith7/PlayerSocket'
+  s.homepage         = 'https://github.com/devplaynew/PlayerSocket'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'banwith7' => 'banwith7@gmail.com' }
-  s.source           = { :git => 'https://github.com/banwith7/PlayerSocket.git', :tag => s.version.to_s }
+  s.author           = { 'devplaynew' => 'banwith7@gmail.com' }
+  s.source           = { :git => 'https://github.com/devplaynew/PlayerSocket.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '9.0'
