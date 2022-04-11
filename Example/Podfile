@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'PlayerSocket_Example' do
+  pod 'PlayerSocket', :path => '../'
+
+  target 'PlayerSocket_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
