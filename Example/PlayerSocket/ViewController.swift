@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import PlayerSocket
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        Foma.sayHello(with: "test")
         // Do any additional setup after loading the view, typically from a nib.
     }
 
