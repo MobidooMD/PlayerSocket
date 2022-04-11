@@ -1,0 +1,16 @@
+PODS:
+  - PlayerSocket (0.1.0)
+
+DEPENDENCIES:
+  - PlayerSocket (from `../`)
+
+EXTERNAL SOURCES:
+  PlayerSocket:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  PlayerSocket: 4d1a66154dba436c574af1d545481bd8633a4d06
+
+PODFILE CHECKSUM: 426fb01e546a0a89d93008b3a667cd3fca4f7fa2
+
+COCOAPODS: 1.11.2

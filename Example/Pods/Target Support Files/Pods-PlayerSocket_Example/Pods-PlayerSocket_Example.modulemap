@@ -1,0 +1,6 @@
+framework module Pods_PlayerSocket_Example {
+  umbrella header "Pods-PlayerSocket_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
