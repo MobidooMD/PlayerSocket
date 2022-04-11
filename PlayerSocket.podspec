@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PlayerSocket'
-  s.version          = '0.1.0'
+  s.version          = '0.1.2'
   s.summary          = '플레이어 소켓입니다.'
 
 # This description is used to generate tags and improve search results.
@@ -28,10 +28,9 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/devplaynew/PlayerSocket.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 
   s.source_files = 'PlayerSocket/Classes/**/*'
-  s.version          = '0.1.1'
   # s.resource_bundles = {
   #   'PlayerSocket' => ['PlayerSocket/Assets/*.png']
   # }
