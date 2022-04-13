@@ -24,10 +24,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
-  PlayerSocket: 465fb5d74079b68434db09fb96a212d29bcb20ab
+  PlayerSocket: 8cc455eb51645f670665bee219d6995d17cb380f
   Socket.IO-Client-Swift: 21e6a8a23a7d367d5ddfab6cbbd3c679cf3c25d6
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
 
-PODFILE CHECKSUM: eb3eb6fff760d6792ca89fd9500bdcf75cabdec3
+PODFILE CHECKSUM: af4d3fffa70e17be9c370e913d9f7db4dca426b5
 
 COCOAPODS: 1.11.2

@@ -8,34 +8,34 @@
 import Foundation
 import SocketIO
 
-struct PlayerSocket {
+public struct PlayerSocket {
     // MARK: - REQUEST | SOCKETDATA
     // socket emit 시 인증 정보 담을 수 있는 구조체
-    struct Auth: SocketData {
+    public struct Auth: SocketData {
         let isAdmin : Bool?
         let token : String?
         let userId : String?
-        func socketRepresentation() -> SocketData {
+        public func socketRepresentation() -> SocketData {
             return ["isAdmin": isAdmin, "token": token, "userId": userId]
         }
     }
 
     // socket emit init 요청에 대한 구조체
-    struct Init: SocketData {
+    public struct Init: SocketData {
         let roomId : String?
         let auth : Auth?
-        func socketRepresentation() -> SocketData {
+        public func socketRepresentation() -> SocketData {
             return ["roomId": roomId, "auth": auth?.socketRepresentation()]
         }
     }
     
     // socket emit sendMessage에 대한 구조체
-    struct sendMessage: SocketData {
+    public struct sendMessage: SocketData {
         let roomId: String?
         let isAdmin: Bool?
         let messageInput: MessageInput?
         
-        struct MessageInput {
+        public struct MessageInput {
             let partnerId: String?
             let messageType: Int?
             let message: String?
@@ -46,19 +46,19 @@ struct PlayerSocket {
             let roomId: String?
             let data = "none"
             
-            func socketRepresentation() -> SocketData {
+            public func socketRepresentation() -> SocketData {
                 return ["partnerId": partnerId, "messageType": messageType, "message": message, "userNick": userNick, "isLive": isLive, "userName": userName, "userId": userId, "roomId": roomId, "data": data]
             }
         }
-        func socketRepresentation() -> SocketData {
+        public func socketRepresentation() -> SocketData {
             return ["roomId": roomId, "isAdmin": isAdmin, "input": messageInput?.socketRepresentation()]
         }
     }
     
     // socket emit sendLike 요청에 대한 구조체
-    struct sendLike: SocketData {
+    public struct sendLike: SocketData {
         let roomId : String?
-        func socketRepresentation() -> SocketData {
+        public func socketRepresentation() -> SocketData {
             return ["roomId": roomId, "value": 1]
         }
     }
@@ -66,15 +66,15 @@ struct PlayerSocket {
     
 
     // MARK: - Response | Codable
-    struct BanUserInfo : Codable {
+    public struct BanUserInfo : Codable {
         var userId : [String]?
     }
 
-    struct BannedWordInfo : Codable {
+    public struct BannedWordInfo : Codable {
         var bannedWord : [String]?
     }
 
-    struct Room : Codable {
+    public struct Room : Codable {
         var banUserInfo : BanUserInfo?
         var bannedWordInfo : BannedWordInfo?
         var canChat : Bool?
@@ -93,7 +93,7 @@ struct PlayerSocket {
         var updateDt : String?
     }
 
-    struct JoinUser : Codable {
+    public struct JoinUser : Codable {
         var isLive : Bool?
         var message : String?
         var messageId : String?
@@ -106,7 +106,7 @@ struct PlayerSocket {
         var userNick : String?
     }
 
-    struct InitModel : Codable {
+    public struct InitModel : Codable {
         var currentDt : String?
         var joinUser : [JoinUser]?
         var liveUserCount : Int64?
@@ -114,14 +114,14 @@ struct PlayerSocket {
         var socketUpdateRoomName : String?
     }
 
-    struct UpdateRoomModel : Codable {
+    public struct UpdateRoomModel : Codable {
         var joinUser : [JoinUser]?
         var liveUserCount : Int64?
         var room : Room?
         var roomId : String?
     }
 
-    struct MessageModel: Codable {
+    public struct MessageModel: Codable {
         let regDate: String?
         let isAdmin: Bool?
         let message: String?
@@ -139,7 +139,7 @@ struct PlayerSocket {
         let userNick: String?
     }
     
-    struct LikeModel: Codable {
+    public struct LikeModel: Codable {
         let roomId: String?
         let value: Int?
     }

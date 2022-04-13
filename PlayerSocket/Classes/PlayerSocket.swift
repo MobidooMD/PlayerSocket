@@ -1,7 +1,7 @@
 import Foundation
 import SocketIO
 
-protocol PlayerSocketEventDelegate: class {
+public protocol PlayerSocketEventDelegate: class {
     func updateConnectionStatus(state : String)
     func updateMessage(messages: [PlayerSocket.MessageModel])
     func updateRoom(updateRoom: PlayerSocket.UpdateRoomModel, isInit: Bool)
@@ -13,8 +13,8 @@ protocol PlayerSocketEventDelegate: class {
     func likeKinesis(like: PlayerSocket.LikeModel)
 }
 
-class PlayerSocketEventCallback {
-    weak static var delegate: PlayerSocketEventDelegate?
+public class PlayerSocketEventCallback {
+    public weak static var delegate: PlayerSocketEventDelegate?
     
     static public func onConnect (data: [Any], ack : SocketAckEmitter) {
         LogManager.print(output: "connect", logType: .WebSocket)
@@ -26,9 +26,15 @@ class PlayerSocketEventCallback {
         delegate?.updateConnectionStatus(state: "disconnect")
     }
     
+    static public func error (data: [Any], ack : SocketAckEmitter) {
+        LogManager.print(output: "error", logType: .WebSocket)
+        delegate?.updateConnectionStatus(state: "error")
+    }
+    
     static public func onStatusChange (data: [Any], ack : SocketAckEmitter) {
         LogManager.print(output: "statusChange \(data)", logType: .WebSocket)
         delegate?.updateConnectionStatus(state: "statusChange")
+        
     }
     
     static public func onInit (data: [Any], ack : SocketAckEmitter) {

@@ -8,7 +8,10 @@
 import Foundation
 import SocketIO
 
-class PlayerSocketConnector {
+public class PlayerSocketConnector {
+    
+    public init() {
+    }
     
     var manager : SocketManager?
     var socket : SocketIOClient?
@@ -20,7 +23,7 @@ class PlayerSocketConnector {
     var _token : String?
     var _userId : String?
     
-    func setConnectionInfo(url : String, isSecure : Bool, reconnect : Bool, roomId : String, showLog : Bool) {
+    public func setConnectionInfo(url : String, isSecure : Bool, reconnect : Bool, roomId : String, showLog : Bool) {
         _url = url
         _isSecure = isSecure
         _reconnect = reconnect
@@ -38,30 +41,30 @@ class PlayerSocketConnector {
         socket = manager?.defaultSocket
     }
     
-    func setUserInfo(isAdmin: Bool, token: String, userId: String) {
+    public func setUserInfo(isAdmin: Bool, token: String, userId: String) {
         _isAdmin = isAdmin
         _token = token
         _userId = userId
     }
     
-    func onEventRegister(eventName: String, _callback: @escaping ([Any], SocketAckEmitter) -> ()) {
+    public func onEventRegister(eventName: String, _callback: @escaping ([Any], SocketAckEmitter) -> ()) {
         guard let socket = socket else { return }
         socket.on(eventName, callback: _callback)
     }
     
-    func socketConnect() {
+    public func socketConnect() {
         guard let socket = socket else { return }
         LogManager.print(output: "CONNECTOR try connect", logType: .WebSocket)
         socket.connect()
     }
     
-    func socketDisconnect() {
+    public func socketDisconnect() {
         guard let socket = socket else { return }
         LogManager.print(output: "CONNECTOR try disconnect", logType: .WebSocket)
         socket.disconnect()
     }
     
-    func emitInit() {
+    public func emitInit() {
         LogManager.print(output: "CONNECTOR emitInit", logType: .WebSocket)
         guard let roomId = _roomId, let token = _token, let userId = _userId , let socket = socket else { return }
         
@@ -69,14 +72,13 @@ class PlayerSocketConnector {
         socket.emit("init", initModel)
     }
     
-    func sendMessage(with model: PlayerSocket.sendMessage) {
+    public func sendMessage(with model: PlayerSocket.sendMessage) {
         LogManager.print(output: "CONNECTOR sendMessage", logType: .WebSocket)
-        
         guard let socket = socket else { return }
         socket.emit("sendMessage", model)
     }
     
-    func sendLike(with roomId: String) {
+    public func sendLike(with roomId: String) {
         LogManager.print(output: "CONNECTOR sendLike", logType: .WebSocket)
         
         guard let socket = socket else { return }
