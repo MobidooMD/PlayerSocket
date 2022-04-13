@@ -1,22 +1,32 @@
 {
   "name": "PlayerSocket",
-  "version": "0.1.0",
-  "summary": "A short description of PlayerSocket.",
+  "version": "0.1.2",
+  "summary": "플레이어 소켓입니다.",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/keaton/PlayerSocket",
+  "homepage": "https://github.com/devplaynew/PlayerSocket",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "keaton": "keaton@mobidoo.co.kr"
+    "devplaynew": "banwith7@gmail.com"
   },
   "source": {
-    "git": "https://github.com/keaton/PlayerSocket.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/devplaynew/PlayerSocket.git",
+    "tag": "0.1.2"
   },
   "platforms": {
     "ios": "9.0"
   },
-  "source_files": "PlayerSocket/Classes/**/*"
+  "source_files": "PlayerSocket/Classes/**/*",
+  "swift_versions": "5.0",
+  "dependencies": {
+    "Socket.IO-Client-Swift": [
+      "~> 14.0.0"
+    ],
+    "lottie-ios": [
+
+    ]
+  },
+  "swift_version": "5.0"
 }

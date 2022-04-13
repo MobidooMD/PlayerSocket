@@ -43,4 +43,5 @@ TODO: Add long description of the pod here.
   s.swift_versions = '5.0'
   # WebSocket
   s.dependency 'Socket.IO-Client-Swift', '~> 14.0.0'
+  s.dependency 'lottie-ios' # https://github.com/airbnb/lottie-ios
 end
