@@ -7,16 +7,16 @@
 //
 
 import UIKit
+import Foundation
 import PlayerSocket
 
+var socketConnector: PlayerSocketConnector?
 
 class ViewController: UIViewController {
     @IBOutlet weak var urlInPutTextField: UITextField!
     @IBOutlet weak var roomIdInPutTextField: UITextField!
     @IBOutlet weak var initButton: UIButton!
     @IBOutlet weak var tokenTextField: UITextField!
-    var socketConnector: PlayerSocketConnector?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,22 +35,34 @@ class ViewController: UIViewController {
         var url = String()
         var roomId = String()
         var token = String()
-        
         url = urlInPutTextField.text ?? ""
         roomId = roomIdInPutTextField.text ?? ""
         token = tokenTextField.text ?? ""
         
-        self.socketConnector?.setConnectionInfo(url: url, isSecure: true, reconnect: true, roomId: roomId, showLog: true)
-       
-        self.socketConnector?.setUserInfo(isAdmin: true, token: token, userId: "")
-        self.onEventRegister()
-        self.socketConnector?.socketConnect()
-        guard let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "connectedVC") as? ConnectedVC else { return }
-        secondViewController.modalTransitionStyle = .coverVertical
-        secondViewController.modalPresentationStyle = .fullScreen
-        secondViewController.url = urlInPutTextField.text
-        secondViewController.roomId = urlInPutTextField.text
-        self.present(secondViewController, animated: true, completion: nil)
+        if url == "" || roomId == "" || token == "" {
+            let alert = UIAlertController(title: "항목을 모두 채워주세요", message: "", preferredStyle: UIAlertController.Style.alert)
+            // 메시지 창 컨트롤러에 들어갈 버튼 액션 객체 생성
+            let destructiveAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.destructive){(_) in
+                self.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(destructiveAction)
+            self.present(alert, animated: false)
+        } else {
+            if url.contains("://") == true && url.contains(".") == true{
+                socketConnector?.setConnectionInfo(url: url, isSecure: true, reconnect: true, roomId: roomId, showLog: true)
+                socketConnector?.setUserInfo(isAdmin: true, token: token, userId: "uiux_mobile")
+                self.onEventRegister()
+                socketConnector?.socketConnect()
+            } else {
+                let alert = UIAlertController(title: "형식에 맞춰써주세요", message: "ex) https://xxxx.com", preferredStyle: UIAlertController.Style.alert)
+                // 메시지 창 컨트롤러에 들어갈 버튼 액션 객체 생성
+                let destructiveAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.destructive){(_) in
+                    self.dismiss(animated: true, completion: nil)
+                }
+                alert.addAction(destructiveAction)
+                self.present(alert, animated: false)
+            }
+        }
     }
     
 }
@@ -96,31 +108,50 @@ extension ViewController: PlayerSocketEventDelegate {
     }
     
     func updateConnectionStatus(state: String) {
-        print("test1")
-        print(state)
+        switch state {
+        case "connect":
+            guard let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "connectedVC") as? ConnectedVC else { return }
+            secondViewController.modalTransitionStyle = .coverVertical
+            secondViewController.modalPresentationStyle = .fullScreen
+            self.present(secondViewController, animated: true, completion: nil)
+        case "error":
+            let alert = UIAlertController(title: "ERROR", message: "URL을 확인해주세요", preferredStyle: UIAlertController.Style.alert)
+            let destructiveAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.destructive){(_) in
+                self.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(destructiveAction)
+            self.present(alert, animated: false)
+        case "stateChage":
+            print(state)
+        default:
+            print(state)
+        }
     }
     
     func updateMessage(messages: [PlayerSocket.MessageModel]) {
-        print("test2")
     }
     
     func updateRoom(updateRoom: PlayerSocket.UpdateRoomModel, isInit: Bool) {
-        print("test3")
     }
     
     func refetchRoom(refetchRoom: PlayerSocket.Room, isInit: Bool) {
-        print("test4")
     }
     
     func updateInit(initModel: PlayerSocket.InitModel) {
-        print("test5")
     }
     
     func chatKinesis(message: PlayerSocket.MessageModel) {
-        print("test6")
     }
     
     func likeKinesis(like: PlayerSocket.LikeModel) {
-        print("test7")
+    }
+    
+    func invalidToken() {
+        let alert = UIAlertController(title: "유효한 토큰이 아닙니다.", message: "token invalidToken", preferredStyle: UIAlertController.Style.alert)
+        // 메시지 창 컨트롤러에 들어갈 버튼 액션 객체 생성
+        let destructiveAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.destructive){(_) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(destructiveAction)
     }
 }

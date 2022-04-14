@@ -75,22 +75,22 @@ public struct PlayerSocket {
     }
 
     public struct Room : Codable {
-        var banUserInfo : BanUserInfo?
-        var bannedWordInfo : BannedWordInfo?
-        var canChat : Bool?
-        var chatCounterInfo : Int64?
-        var currentPurchase : Bool?
-        var currentQuiz : Bool?
-        var currentWinPurchase : Bool?
-        var incomingCounterInfo : Int64?
-        var publishDate : String?
-        var reactionCounterInfo : Int64?
-        var regDate : String?
-        var roomId : String?
-        var roomState : Int?
-        var streamInfo : String?
-        var title : String?
-        var updateDt : String?
+        public var banUserInfo : BanUserInfo?
+        public var bannedWordInfo : BannedWordInfo?
+        public var canChat : Bool?
+        public var chatCounterInfo : Int64?
+        public var currentPurchase : Bool?
+        public var currentQuiz : Bool?
+        public var currentWinPurchase : Bool?
+        public var incomingCounterInfo : Int64?
+        public  var publishDate : String?
+        public var reactionCounterInfo : Int64?
+        public var regDate : String?
+        public var roomId : String?
+        public var roomState : Int?
+        public var streamInfo : String?
+        public var title : String?
+        public var updateDt : String?
     }
 
     public struct JoinUser : Codable {
@@ -107,18 +107,18 @@ public struct PlayerSocket {
     }
 
     public struct InitModel : Codable {
-        var currentDt : String?
-        var joinUser : [JoinUser]?
-        var liveUserCount : Int64?
-        var room : Room?
-        var socketUpdateRoomName : String?
+        public var currentDt : String?
+        public var joinUser : [JoinUser]?
+        public var liveUserCount : Int64?
+        public var room : Room?
+        public var socketUpdateRoomName : String?
     }
 
     public struct UpdateRoomModel : Codable {
-        var joinUser : [JoinUser]?
-        var liveUserCount : Int64?
-        var room : Room?
-        var roomId : String?
+        public var joinUser : [JoinUser]?
+        public var liveUserCount : Int64?
+        public var room : Room?
+        public var roomId : String?
     }
 
     public struct MessageModel: Codable {

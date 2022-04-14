@@ -7,6 +7,7 @@ public protocol PlayerSocketEventDelegate: class {
     func updateRoom(updateRoom: PlayerSocket.UpdateRoomModel, isInit: Bool)
     func refetchRoom(refetchRoom: PlayerSocket.Room, isInit: Bool)
     func updateInit(initModel: PlayerSocket.InitModel)
+    func invalidToken()
     
     // Kinesis Delegate
     func chatKinesis(message: PlayerSocket.MessageModel)
@@ -209,5 +210,6 @@ public class PlayerSocketEventCallback {
     static public func onInvalidToken (data: [Any], ack : SocketAckEmitter) {
         LogManager.print(output: "invalidToken", logType: .WebSocket)
         LogManager.print(output: data, logType: .WebSocket)
+        delegate?.invalidToken()
     }
 }
