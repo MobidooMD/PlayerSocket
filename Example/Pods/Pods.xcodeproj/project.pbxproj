@@ -187,9 +187,6 @@
 		F354A367109FD383B6D3D6BD38703E08 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE3141B110682983B97DE6BB8193EFA /* WebSocket.swift */; };
 		F5094BA410DF8FDCD19FA373D37378A8 /* CompatibleAnimationKeypath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E541034BAB14BADF54A34DDB603831B /* CompatibleAnimationKeypath.swift */; };
 		F7ED30A6C38DF87C5B860E5E35560AC7 /* PlayerSocket-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C38A0DFD17C3818D94BA383DAE9008D1 /* PlayerSocket-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F9688E34280814A60025EEE6 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9688E31280814A60025EEE6 /* LogManager.swift */; };
-		F9688E35280814A70025EEE6 /* SocketConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9688E32280814A60025EEE6 /* SocketConnector.swift */; };
-		F9688E36280814A70025EEE6 /* SocketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9688E33280814A60025EEE6 /* SocketModel.swift */; };
 		FD6F66419497303FA005C61BB10BC306 /* LayerTransformNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C289FCE604419C756C432B5EDD05908 /* LayerTransformNode.swift */; };
 /* End PBXBuildFile section */
 
@@ -467,9 +464,6 @@
 		F6B39E401D0147AE1A0BFC50B5C1CB6F /* ShapeRenderLayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShapeRenderLayer.swift; path = "lottie-swift/src/Private/NodeRenderSystem/RenderLayers/ShapeRenderLayer.swift"; sourceTree = "<group>"; };
 		F7C03B754832338785C54D8EF5642732 /* SolidCompositionLayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SolidCompositionLayer.swift; path = "lottie-swift/src/Private/LayerContainers/CompLayers/SolidCompositionLayer.swift"; sourceTree = "<group>"; };
 		F952BD6E6F120AD801183C7290DA1345 /* FillI.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FillI.swift; path = "lottie-swift/src/Private/Model/ShapeItems/FillI.swift"; sourceTree = "<group>"; };
-		F9688E31280814A60025EEE6 /* LogManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogManager.swift; path = PlayerSocket/Classes/LogManager.swift; sourceTree = "<group>"; };
-		F9688E32280814A60025EEE6 /* SocketConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketConnector.swift; path = PlayerSocket/Classes/SocketConnector.swift; sourceTree = "<group>"; };
-		F9688E33280814A60025EEE6 /* SocketModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketModel.swift; path = PlayerSocket/Classes/SocketModel.swift; sourceTree = "<group>"; };
 		F9C389E88567FA6A59FC932BFE3D8784 /* EllipseNode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EllipseNode.swift; path = "lottie-swift/src/Private/NodeRenderSystem/Nodes/PathNodes/EllipseNode.swift"; sourceTree = "<group>"; };
 		FA2F4CF0CBEE98146D76CE88A5CE7CBB /* Mask.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Mask.swift; path = "lottie-swift/src/Private/Model/Objects/Mask.swift"; sourceTree = "<group>"; };
 		FABA197106E7570CB1A040E15D812F14 /* Socket.IO-Client-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Socket.IO-Client-Swift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -673,9 +667,6 @@
 		D1DB8940307D6B7F4CBDAFC5CA11D1FA /* PlayerSocket */ = {
 			isa = PBXGroup;
 			children = (
-				F9688E31280814A60025EEE6 /* LogManager.swift */,
-				F9688E32280814A60025EEE6 /* SocketConnector.swift */,
-				F9688E33280814A60025EEE6 /* SocketModel.swift */,
 				230256BC064E49D3A442CEB0428EFCDB /* PlayerSocket.swift */,
 				E0128A5EA8980DC101F81C749E4B52EF /* Pod */,
 				7A577F6B796D94FC6C24B6BF68C1A881 /* Support Files */,
@@ -1301,11 +1292,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9688E34280814A60025EEE6 /* LogManager.swift in Sources */,
 				4E1D4F4CE17F11C63B2EA4402E7D3C06 /* PlayerSocket.swift in Sources */,
-				F9688E35280814A70025EEE6 /* SocketConnector.swift in Sources */,
 				79AA2951738960AB8332B9EC20F7D3B3 /* PlayerSocket-dummy.m in Sources */,
-				F9688E36280814A70025EEE6 /* SocketModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
