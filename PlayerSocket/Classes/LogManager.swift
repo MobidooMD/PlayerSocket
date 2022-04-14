@@ -22,7 +22,7 @@ enum LogType: String {
 class LogManager: NSObject {
     
     private static let FORCE_LOG = false
-    
+
     static func print(output: Any?, logType: LogType = .Normal, osLogType: OSLogType = .default, file: String = #file, line: Int = #line) {
         
         var filename: NSString = file as NSString
