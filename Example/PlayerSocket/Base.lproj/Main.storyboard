@@ -80,7 +80,7 @@
                                             <attributedString key="attributedTitle">
                                                 <fragment content="connect">
                                                     <attributes>
-                                                        <font key="NSFont" size="10" name=".SFNS-Regular"/>
+                                                        <font key="NSFont" metaFont="system" size="10"/>
                                                     </attributes>
                                                 </fragment>
                                             </attributedString>
@@ -632,12 +632,27 @@
                                     <constraint firstAttribute="bottom" secondItem="Czm-UN-x65" secondAttribute="bottom" id="z9s-fn-duE"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPc-8e-Kyz">
+                                <rect key="frame" x="10" y="0.0" width="61" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="GEy-rC-Xbf"/>
+                                    <constraint firstAttribute="width" constant="61" id="XMa-dL-WSz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="BACK"/>
+                                <connections>
+                                    <action selector="backAction:" destination="dJt-mN-dPb" eventType="touchUpInside" id="Jio-dt-P4P"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="GF3-MC-ms5" firstAttribute="leading" secondItem="Lbm-T4-rgb" secondAttribute="leading" id="5k1-lO-8Ae"/>
                             <constraint firstItem="GF3-MC-ms5" firstAttribute="top" secondItem="OCl-nP-oqS" secondAttribute="bottom" constant="30" id="7Ha-qW-8ez"/>
+                            <constraint firstItem="uPc-8e-Kyz" firstAttribute="leading" secondItem="Lbm-T4-rgb" secondAttribute="leading" constant="10" id="Fh7-kq-WOg"/>
                             <constraint firstAttribute="trailing" secondItem="GF3-MC-ms5" secondAttribute="trailing" id="IXG-h9-QUI"/>
+                            <constraint firstItem="uPc-8e-Kyz" firstAttribute="top" secondItem="OCl-nP-oqS" secondAttribute="bottom" id="WPa-PT-51J"/>
                             <constraint firstAttribute="trailing" secondItem="K8K-AJ-Oq3" secondAttribute="trailing" constant="20" id="hMW-8u-oQK"/>
                             <constraint firstItem="bF6-AN-pL5" firstAttribute="top" secondItem="K8K-AJ-Oq3" secondAttribute="bottom" constant="20" id="niV-Ec-FAa"/>
                             <constraint firstItem="K8K-AJ-Oq3" firstAttribute="top" secondItem="GF3-MC-ms5" secondAttribute="bottom" id="u15-nt-Cif"/>
