@@ -2,6 +2,7 @@ import Foundation
 import SocketIO
 
 public protocol PlayerSocketEventDelegate: class {
+    func onEventRegister()
     func updateConnectionStatus(state : String)
     func updateMessage(messages: [PlayerSocket.MessageModel])
     func updateRoom(updateRoom: PlayerSocket.UpdateRoomModel, isInit: Bool)
