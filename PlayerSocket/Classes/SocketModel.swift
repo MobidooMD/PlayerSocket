@@ -12,9 +12,9 @@ public struct PlayerSocket {
     // MARK: - REQUEST | SOCKETDATA
     // socket emit 시 인증 정보 담을 수 있는 구조체
     public struct Auth: SocketData {
-        let isAdmin : Bool?
-        let token : String?
-        let userId : String?
+        public let isAdmin : Bool?
+        public let token : String?
+        public let userId : String?
         public func socketRepresentation() -> SocketData {
             return ["isAdmin": isAdmin, "token": token, "userId": userId]
         }
@@ -22,8 +22,8 @@ public struct PlayerSocket {
 
     // socket emit init 요청에 대한 구조체
     public struct Init: SocketData {
-        let roomId : String?
-        let auth : Auth?
+        public let roomId : String?
+        public let auth : Auth?
         public func socketRepresentation() -> SocketData {
             return ["roomId": roomId, "auth": auth?.socketRepresentation()]
         }
@@ -31,20 +31,20 @@ public struct PlayerSocket {
     
     // socket emit sendMessage에 대한 구조체
     public struct sendMessage: SocketData {
-        let roomId: String?
-        let isAdmin: Bool?
-        let messageInput: MessageInput?
+        public let roomId: String?
+        public let isAdmin: Bool?
+        public let messageInput: MessageInput?
         
         public struct MessageInput {
-            let partnerId: String?
-            let messageType: Int?
-            let message: String?
-            let userNick: String?
-            let isLive: Bool?
-            let userName: String?
-            let userId: String?
-            let roomId: String?
-            let data = "none"
+            public let partnerId: String?
+            public let messageType: Int?
+            public let message: String?
+            public let userNick: String?
+            public let isLive: Bool?
+            public let userName: String?
+            public let userId: String?
+            public let roomId: String?
+            public let data = "none"
             
             public func socketRepresentation() -> SocketData {
                 return ["partnerId": partnerId, "messageType": messageType, "message": message, "userNick": userNick, "isLive": isLive, "userName": userName, "userId": userId, "roomId": roomId, "data": data]
@@ -57,7 +57,7 @@ public struct PlayerSocket {
     
     // socket emit sendLike 요청에 대한 구조체
     public struct sendLike: SocketData {
-        let roomId : String?
+        public let roomId : String?
         public func socketRepresentation() -> SocketData {
             return ["roomId": roomId, "value": 1]
         }
@@ -67,11 +67,11 @@ public struct PlayerSocket {
 
     // MARK: - Response | Codable
     public struct BanUserInfo : Codable {
-        var userId : [String]?
+        public var userId : [String]?
     }
 
     public struct BannedWordInfo : Codable {
-        var bannedWord : [String]?
+        public var bannedWord : [String]?
     }
 
     public struct Room : Codable {
@@ -94,16 +94,16 @@ public struct PlayerSocket {
     }
 
     public struct JoinUser : Codable {
-        var isLive : Bool?
-        var message : String?
-        var messageId : String?
-        var messageType : Int?
-        var partnerId : String?
-        var regDate : String?
-        var roomId : String?
-        var userId : String?
-        var userName : String?
-        var userNick : String?
+        public var isLive : Bool?
+        public var message : String?
+        public var messageId : String?
+        public var messageType : Int?
+        public var partnerId : String?
+        public var regDate : String?
+        public var roomId : String?
+        public var userId : String?
+        public var userName : String?
+        public var userNick : String?
     }
 
     public struct InitModel : Codable {
@@ -122,26 +122,26 @@ public struct PlayerSocket {
     }
 
     public struct MessageModel: Codable {
-        let regDate: String?
-        let isAdmin: Bool?
-        let message: String?
-        let messageId: String?
-        let partnerId: String?
-        let messageType: Int?
-        let deleteOwner: String?
-        let isLive: Bool?
-        let roomId: String?
-        let userId: String?
-        let userName: String?
-        let data: String?
-        let updateDt: String?
-        let inactive: Bool?
-        let userNick: String?
+        public let regDate: String?
+        public let isAdmin: Bool?
+        public let message: String?
+        public let messageId: String?
+        public let partnerId: String?
+        public let messageType: Int?
+        public let deleteOwner: String?
+        public let isLive: Bool?
+        public let roomId: String?
+        public let userId: String?
+        public let userName: String?
+        public let data: String?
+        public let updateDt: String?
+        public let inactive: Bool?
+        public let userNick: String?
     }
     
     public struct LikeModel: Codable {
-        let roomId: String?
-        let value: Int?
+        public let roomId: String?
+        public let value: Int?
     }
 
 }
