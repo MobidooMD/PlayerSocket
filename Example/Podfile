@@ -4,7 +4,6 @@ platform :ios, '10.0'
 
 target 'PlayerSocket_Example' do
   pod 'PlayerSocket', :path => '../'
-  pod 'Socket.IO-Client-Swift', '~> 14.0.0' 
   pod 'lottie-ios' # https://github.com/airbnb/lottie-ios
 
   target 'PlayerSocket_Tests' do

@@ -38,7 +38,7 @@ extension Array {
 
 extension CharacterSet {
     static var allowedURLCharacterSet: CharacterSet {
-        return CharacterSet(charactersIn: "!*'();:@&=+$,/?%#[]\" {}^").inverted
+        return CharacterSet(charactersIn: "!*'();:@&=+$,/?%#[]\" {}^|").inverted
     }
 }
 
@@ -77,7 +77,7 @@ extension Dictionary where Key == String, Value == Any {
             return .randomizationFactor(factor)
         case let ("secure", secure as Bool):
             return .secure(secure)
-        case let ("security", security as SSLSecurity):
+        case let ("security", security as CertificatePinning):
             return .security(security)
         case let ("selfSigned", selfSigned as Bool):
             return .selfSigned(selfSigned)
@@ -85,7 +85,11 @@ extension Dictionary where Key == String, Value == Any {
             return .sessionDelegate(delegate)
         case let ("compress", compress as Bool):
             return compress ? .compress : nil
-        default:
+        case let ("enableSOCKSProxy", enable as Bool):
+            return .enableSOCKSProxy(enable)
+        case let ("version", version as Int):
+            return .version(SocketIOVersion(rawValue: version) ?? .three)
+        case _:
             return nil
         }
     }
