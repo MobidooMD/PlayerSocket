@@ -7,6 +7,7 @@
 
 import Foundation
 import SocketIO
+import SauceLog
 
 public class PlayerSocketConnector {
     
@@ -54,18 +55,18 @@ public class PlayerSocketConnector {
     
     public func socketConnect() {
         guard let socket = socket else { return }
-        LogManager.print(output: "CONNECTOR try connect", logType: .WebSocket)
+        LogManager.print(output: "CONNECTOR try connect", logType: .Network)
         socket.connect()
     }
     
     public func socketDisconnect() {
         guard let socket = socket else { return }
-        LogManager.print(output: "CONNECTOR try disconnect", logType: .WebSocket)
+        LogManager.print(output: "CONNECTOR try disconnect", logType: .Network)
         socket.disconnect()
     }
     
     public func emitInit() {
-        LogManager.print(output: "CONNECTOR emitInit", logType: .WebSocket)
+        LogManager.print(output: "CONNECTOR emitInit", logType: .Network)
         guard let roomId = _roomId, let token = _token, let userId = _userId , let socket = socket else { return }
         
         let initModel: PlayerSocket.Init = PlayerSocket.Init(roomId: roomId, auth: PlayerSocket.Auth(isAdmin: _isAdmin, token: token, userId: userId))
@@ -73,13 +74,13 @@ public class PlayerSocketConnector {
     }
     
     public func sendMessage(with model: PlayerSocket.sendMessage) {
-        LogManager.print(output: "CONNECTOR sendMessage", logType: .WebSocket)
+        LogManager.print(output: "CONNECTOR sendMessage", logType: .Network)
         guard let socket = socket else { return }
         socket.emit("sendMessage", model)
     }
     
     public func sendLike(with roomId: String) {
-        LogManager.print(output: "CONNECTOR sendLike", logType: .WebSocket)
+        LogManager.print(output: "CONNECTOR sendLike", logType: .Network)
         
         guard let socket = socket else { return }
         let model = PlayerSocket.sendLike(roomId: roomId)
