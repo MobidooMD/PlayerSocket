@@ -1,6 +1,6 @@
 # SauceLog
 
-[![CI Status](https://img.shields.io/travis/mobidooMD/SauceLog.svg?style=flat)](https://travis-ci.org/mobidooMD/SauceLog)
+[![CI Status](https://img.shields.io/travis/mobidooMD/SauceLog.svg?style=flat)](https://cocoapods.org/pods/SauceLog)
 [![Version](https://img.shields.io/cocoapods/v/SauceLog.svg?style=flat)](https://cocoapods.org/pods/SauceLog)
 [![License](https://img.shields.io/cocoapods/l/SauceLog.svg?style=flat)](https://cocoapods.org/pods/SauceLog)
 [![Platform](https://img.shields.io/cocoapods/p/SauceLog.svg?style=flat)](https://cocoapods.org/pods/SauceLog)

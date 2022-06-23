@@ -15,7 +15,7 @@ public enum LogType: String {
     case Error = "SAUCELog ⛔️ Error"
 }
 
-public class LogManager: NSObject {
+public class SauceLog: NSObject {
     
     private static var FORCE_LOG: Bool {
         

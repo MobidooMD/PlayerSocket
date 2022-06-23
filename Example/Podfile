@@ -5,7 +5,6 @@ platform :ios, '10.0'
 target 'PlayerSocket_Example' do
   pod 'PlayerSocket', :path => '../'
   pod 'lottie-ios' # https://github.com/airbnb/lottie-ios
-  pod 'SauceLog' # https://github.com/MobidooMD/SauceLog
 
   target 'PlayerSocket_Tests' do
     inherit! :search_paths

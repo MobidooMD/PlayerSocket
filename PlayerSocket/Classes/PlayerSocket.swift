@@ -2,6 +2,8 @@ import Foundation
 import SocketIO
 import SauceLog
 
+typealias LogManager = SauceLog
+
 public protocol PlayerSocketEventDelegate: class {
     func onEventRegister()
     func updateConnectionStatus(state : String)
