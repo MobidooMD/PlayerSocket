@@ -69,11 +69,11 @@ public class PlayerSocketConnector {
         LogManager.print(output: "CONNECTOR emitInit", logType: .Network)
         guard let roomId = _roomId, let token = _token, let userId = _userId , let socket = socket else { return }
         
-        let initModel: PlayerSocket.Init = PlayerSocket.Init(roomId: roomId, auth: PlayerSocket.Auth(isAdmin: _isAdmin, token: token, userId: userId))
+        let initModel: PlayerSocketModel.Init = PlayerSocketModel.Init(roomId: roomId, auth: PlayerSocketModel.Auth(isAdmin: _isAdmin, token: token, userId: userId))
         socket.emit("init", initModel)
     }
     
-    public func sendMessage(with model: PlayerSocket.sendMessage) {
+    public func sendMessage(with model: PlayerSocketModel.sendMessage) {
         LogManager.print(output: "CONNECTOR sendMessage", logType: .Network)
         guard let socket = socket else { return }
         socket.emit("sendMessage", model)
@@ -83,8 +83,10 @@ public class PlayerSocketConnector {
         LogManager.print(output: "CONNECTOR sendLike", logType: .Network)
         
         guard let socket = socket else { return }
-        let model = PlayerSocket.sendLike(roomId: roomId)
+        let model = PlayerSocketModel.sendLike(roomId: roomId)
         socket.emit("sendLike", model)
     }
+    
+    
     
 }

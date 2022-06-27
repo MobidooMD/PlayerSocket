@@ -98,11 +98,11 @@ extension ConnectedVC: PlayerSocketEventDelegate {
         }
     }
     
-    func updateMessage(messages: [PlayerSocket.MessageModel]) {
+    func updateMessage(messages: [PlayerSocketModel.MessageModel]) {
     }
     
-    func updateRoom(updateRoom: PlayerSocket.UpdateRoomModel, isInit: Bool) {
-        guard let user = updateRoom.joinUser?.first as? PlayerSocket.JoinUser, let room = updateRoom.room as? PlayerSocket.Room else { return }
+    func updateRoom(updateRoom: PlayerSocketModel.UpdateRoomModel, isInit: Bool) {
+        guard let user = updateRoom.joinUser?.first as? PlayerSocketModel.JoinUser, let room = updateRoom.room as? PlayerSocketModel.Room else { return }
         
         let viewCount = Int(room.incomingCounterInfo ?? 0)
        
@@ -143,18 +143,18 @@ extension ConnectedVC: PlayerSocketEventDelegate {
         roomIdText.text = room.roomId
     }
     
-    func refetchRoom(refetchRoom: PlayerSocket.Room, isInit: Bool) {
+    func refetchRoom(refetchRoom: PlayerSocketModel.Room, isInit: Bool) {
     }
     
-    func updateInit(initModel: PlayerSocket.InitModel) {
+    func updateInit(initModel: PlayerSocketModel.InitModel) {
         let updateRoomKey = initModel.socketUpdateRoomName!
         socketConnector?.onEventRegister(eventName: updateRoomKey, _callback: PlayerSocketEventCallback.onUpdateRoom)
     }
     
-    func chatKinesis(message: PlayerSocket.MessageModel) {
+    func chatKinesis(message: PlayerSocketModel.MessageModel) {
     }
     
-    func likeKinesis(like: PlayerSocket.LikeModel) {
+    func likeKinesis(like: PlayerSocketModel.LikeModel) {
     }
     
     func invalidToken() {
