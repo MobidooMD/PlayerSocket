@@ -8,7 +8,7 @@
 import Foundation
 import SocketIO
 
-public struct PlayerSocket {
+public struct PlayerSocketModel {
     // MARK: - REQUEST | SOCKETDATA
     // socket emit 시 인증 정보 담을 수 있는 구조체
     public struct Auth: SocketData {
@@ -16,7 +16,7 @@ public struct PlayerSocket {
         public let token : String?
         public let userId : String?
         public func socketRepresentation() -> SocketData {
-            return ["isAdmin": isAdmin, "token": token, "userId": userId]
+            return ["isAdmin": isAdmin ?? false, "token": token ?? "", "userId": userId ?? ""]
         }
     }
 
@@ -35,6 +35,12 @@ public struct PlayerSocket {
         public let isAdmin: Bool?
         public let messageInput: MessageInput?
         
+        public init(roomId: String, isAdmin: Bool, messageInput: MessageInput) {
+            self.roomId = roomId
+            self.isAdmin = isAdmin
+            self.messageInput = messageInput
+        }
+        
         public struct MessageInput {
             public let partnerId: String?
             public let messageType: Int?
@@ -44,10 +50,22 @@ public struct PlayerSocket {
             public let userName: String?
             public let userId: String?
             public let roomId: String?
-            public let data = "none"
+            public var data = "none"
+            
+            public init(partnerId: String, messageType: Int, message: String, userNick: String, isLive: Bool, userName: String, userId: String, roomId: String, data:String = "none") {
+                self.partnerId = partnerId
+                self.messageType = messageType
+                self.message = message
+                self.userNick = userNick
+                self.isLive = isLive
+                self.userName = userName
+                self.userId = userId
+                self.roomId = roomId
+                self.data = data
+              }
             
             public func socketRepresentation() -> SocketData {
-                return ["partnerId": partnerId, "messageType": messageType, "message": message, "userNick": userNick, "isLive": isLive, "userName": userName, "userId": userId, "roomId": roomId, "data": data]
+                return ["partnerId": partnerId ?? "", "messageType": messageType ?? 0, "message": message ?? "", "userNick": userNick ?? "", "isLive": isLive ?? false, "userName": userName ?? "", "userId": userId ?? "", "roomId": roomId ?? "", "data": data]
             }
         }
         public func socketRepresentation() -> SocketData {
@@ -58,8 +76,13 @@ public struct PlayerSocket {
     // socket emit sendLike 요청에 대한 구조체
     public struct sendLike: SocketData {
         public let roomId : String?
+        
+        public init(roomId: String) {
+            self.roomId = roomId
+        }
+        
         public func socketRepresentation() -> SocketData {
-            return ["roomId": roomId, "value": 1]
+            return ["roomId": roomId ?? "", "value": 1]
         }
     }
     
