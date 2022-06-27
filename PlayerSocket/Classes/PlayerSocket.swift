@@ -7,15 +7,15 @@ typealias LogManager = SauceLog
 public protocol PlayerSocketEventDelegate: class {
     func onEventRegister()
     func updateConnectionStatus(state : String)
-    func updateMessage(messages: [PlayerSocket.MessageModel])
-    func updateRoom(updateRoom: PlayerSocket.UpdateRoomModel, isInit: Bool)
-    func refetchRoom(refetchRoom: PlayerSocket.Room, isInit: Bool)
-    func updateInit(initModel: PlayerSocket.InitModel)
+    func updateMessage(messages: [PlayerSocketModel.MessageModel])
+    func updateRoom(updateRoom: PlayerSocketModel.UpdateRoomModel, isInit: Bool)
+    func refetchRoom(refetchRoom: PlayerSocketModel.Room, isInit: Bool)
+    func updateInit(initModel: PlayerSocketModel.InitModel)
     func invalidToken()
     
     // Kinesis Delegate
-    func chatKinesis(message: PlayerSocket.MessageModel)
-    func likeKinesis(like: PlayerSocket.LikeModel)
+    func chatKinesis(message: PlayerSocketModel.MessageModel)
+    func likeKinesis(like: PlayerSocketModel.LikeModel)
 }
 
 public class PlayerSocketEventCallback {
@@ -49,9 +49,9 @@ public class PlayerSocketEventCallback {
         
         let responseJson = try? JSONSerialization.data(withJSONObject: response, options: [])
         
-        if let obj = try? JSONDecoder().decode(PlayerSocket.InitModel.self, from: responseJson!) {
+        if let obj = try? JSONDecoder().decode(PlayerSocketModel.InitModel.self, from: responseJson!) {
             delegate?.updateInit(initModel: obj)
-            let model = PlayerSocket.UpdateRoomModel(joinUser: obj.joinUser, liveUserCount: obj.liveUserCount, room: obj.room, roomId: obj.room?.roomId)
+            let model = PlayerSocketModel.UpdateRoomModel(joinUser: obj.joinUser, liveUserCount: obj.liveUserCount, room: obj.room, roomId: obj.room?.roomId)
             delegate?.updateRoom(updateRoom: model, isInit: true)
         }
     }
@@ -66,7 +66,7 @@ public class PlayerSocketEventCallback {
         guard let response = data.first else { return }
         let responseJson = try? JSONSerialization.data(withJSONObject: response, options: [])
         
-        if let obj = try? JSONDecoder().decode(PlayerSocket.UpdateRoomModel.self, from: responseJson!) {
+        if let obj = try? JSONDecoder().decode(PlayerSocketModel.UpdateRoomModel.self, from: responseJson!) {
             delegate?.updateRoom(updateRoom: obj, isInit: false)
         }
     }
@@ -87,14 +87,14 @@ public class PlayerSocketEventCallback {
         guard let response = data.first else { return }
         let responseJson = try? JSONSerialization.data(withJSONObject: response, options: [])
         
-        if let obj = try? JSONDecoder().decode(PlayerSocket.Room.self, from: responseJson!) {
+        if let obj = try? JSONDecoder().decode(PlayerSocketModel.Room.self, from: responseJson!) {
             delegate?.refetchRoom(refetchRoom: obj, isInit: false)
         }
     }
     
     static public func onSendMessage (data: [Any], ack : SocketAckEmitter) {
         
-        var messageList: [PlayerSocket.MessageModel] = []
+        var messageList: [PlayerSocketModel.MessageModel] = []
         
         guard let response = data.first as? NSMutableArray else { return }
         
@@ -102,8 +102,8 @@ public class PlayerSocketEventCallback {
             
             let responseJson = try? JSONSerialization.data(withJSONObject: inside, options: [])
             
-            if let obj = try? JSONDecoder().decode(PlayerSocket.MessageModel.self, from: responseJson!) {
-                guard let message = obj as? PlayerSocket.MessageModel else { return }
+            if let obj = try? JSONDecoder().decode(PlayerSocketModel.MessageModel.self, from: responseJson!) {
+                guard let message = obj as? PlayerSocketModel.MessageModel else { return }
                 messageList.append(message)
             }
         }
@@ -125,8 +125,8 @@ public class PlayerSocketEventCallback {
             
             let responseJson = try? JSONSerialization.data(withJSONObject: inside, options: [])
             
-            if let obj = try? JSONDecoder().decode(PlayerSocket.MessageModel.self, from: responseJson!) {
-                guard let message = obj as? PlayerSocket.MessageModel else { return }
+            if let obj = try? JSONDecoder().decode(PlayerSocketModel.MessageModel.self, from: responseJson!) {
+                guard let message = obj as? PlayerSocketModel.MessageModel else { return }
                 
                // LogManager.print(output: "MyMessage 111 *********** \(message)", logType: .Kinesis)
                 
@@ -142,9 +142,9 @@ public class PlayerSocketEventCallback {
         
         let responseJson = try? JSONSerialization.data(withJSONObject: response, options: [])
 
-        if let obj = try? JSONDecoder().decode(PlayerSocket.LikeModel.self, from: responseJson!) {
+        if let obj = try? JSONDecoder().decode(PlayerSocketModel.LikeModel.self, from: responseJson!) {
             
-            guard let like = obj as? PlayerSocket.LikeModel else { return }
+            guard let like = obj as? PlayerSocketModel.LikeModel else { return }
             
             LogManager.print(output: "MyLike 222 *** \(like)", logType: .Network)
             delegate?.likeKinesis(like: like)
