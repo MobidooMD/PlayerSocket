@@ -14,58 +14,58 @@ public struct PlayerSocketModel {
     public struct Auth: SocketData {
         public let isAdmin : Bool?
         public let token : String?
-        public let userId : String?
+        public let userID : String?
         public func socketRepresentation() -> SocketData {
-            return ["isAdmin": isAdmin ?? false, "token": token ?? "", "userId": userId ?? ""]
+            return ["isAdmin": isAdmin ?? false, "token": token ?? "", "userId": userID ?? ""]
         }
     }
 
     // socket emit init 요청에 대한 구조체
     public struct Init: SocketData {
-        public let roomId : String?
+        public let roomID : String?
         public let auth : Auth?
         public func socketRepresentation() -> SocketData {
-            return ["roomId": roomId, "auth": auth?.socketRepresentation()]
+            return ["roomId": roomID, "auth": auth?.socketRepresentation()]
         }
     }
     
     // socket emit sendMessage에 대한 구조체
     public struct sendMessage: SocketData {
-        public let roomId: String?
+        public let roomID: String?
         public let isAdmin: Bool?
         public let messageInput: MessageInput?
         
-        public init(roomId: String, isAdmin: Bool, messageInput: MessageInput) {
-            self.roomId = roomId
+        public init(roomID: String, isAdmin: Bool, messageInput: MessageInput) {
+            self.roomID = roomID
             self.isAdmin = isAdmin
             self.messageInput = messageInput
         }
         
         public struct MessageInput {
-            public let partnerId: String?
+            public let partnerID: String?
             public let messageType: Int?
             public let message: String?
             public let userNick: String?
             public let isLive: Bool?
             public let userName: String?
-            public let userId: String?
-            public let roomId: String?
+            public let userID: String?
+            public let roomID: String?
             public var data = "none"
             
-            public init(partnerId: String, messageType: Int, message: String, userNick: String, isLive: Bool, userName: String, userId: String, roomId: String, data:String = "none") {
-                self.partnerId = partnerId
+            public init(partnerID: String, messageType: Int, message: String, userNick: String, isLive: Bool, userName: String, userID: String, roomID: String, data: String = "none") {
+                self.partnerID = partnerID
                 self.messageType = messageType
                 self.message = message
                 self.userNick = userNick
                 self.isLive = isLive
                 self.userName = userName
-                self.userId = userId
-                self.roomId = roomId
+                self.userID = userID
+                self.roomID = roomID
                 self.data = data
               }
             
             public func socketRepresentation() -> SocketData {
-                return ["partnerId": partnerId ?? "", "messageType": messageType ?? 0, "message": message ?? "", "userNick": userNick ?? "", "isLive": isLive ?? false, "userName": userName ?? "", "userId": userId ?? "", "roomId": roomId ?? "", "data": data]
+                return ["partnerId": partnerID ?? "", "messageType": messageType ?? 0, "message": message ?? "", "userNick": userNick ?? "", "isLive": isLive ?? false, "userName": userName ?? "", "userId": userID ?? "", "roomId": roomID ?? "", "data": data]
             }
         }
         public func socketRepresentation() -> SocketData {
@@ -75,14 +75,14 @@ public struct PlayerSocketModel {
     
     // socket emit sendLike 요청에 대한 구조체
     public struct sendLike: SocketData {
-        public let roomId : String?
+        public let roomID : String?
         
-        public init(roomId: String) {
-            self.roomId = roomId
+        public init(roomID: String) {
+            self.roomID = roomID
         }
         
         public func socketRepresentation() -> SocketData {
-            return ["roomId": roomId ?? "", "value": 1]
+            return ["roomId": roomID ?? "", "value": 1]
         }
     }
     
@@ -90,7 +90,7 @@ public struct PlayerSocketModel {
 
     // MARK: - Response | Codable
     public struct BanUserInfo : Codable {
-        public var userId : [String]?
+        public var userID : [String]?
     }
 
     public struct BannedWordInfo : Codable {
@@ -106,10 +106,10 @@ public struct PlayerSocketModel {
         public var currentQuiz : Bool?
         public var currentWinPurchase : Bool?
         public var incomingCounterInfo : Int64?
-        public  var publishDate : String?
+        public var publishDate : String?
         public var reactionCounterInfo : Int64?
         public var regDate : String?
-        public var roomId : String?
+        public var roomID : String?
         public var roomState : Int?
         public var streamInfo : String?
         public var title : String?
@@ -119,12 +119,12 @@ public struct PlayerSocketModel {
     public struct JoinUser : Codable {
         public var isLive : Bool?
         public var message : String?
-        public var messageId : String?
+        public var messageID : String?
         public var messageType : Int?
-        public var partnerId : String?
+        public var partnerID : String?
         public var regDate : String?
-        public var roomId : String?
-        public var userId : String?
+        public var roomID : String?
+        public var userID : String?
         public var userName : String?
         public var userNick : String?
     }
@@ -141,20 +141,20 @@ public struct PlayerSocketModel {
         public var joinUser : [JoinUser]?
         public var liveUserCount : Int64?
         public var room : Room?
-        public var roomId : String?
+        public var roomID : String?
     }
 
     public struct MessageModel: Codable {
         public let regDate: String?
         public let isAdmin: Bool?
         public let message: String?
-        public let messageId: String?
-        public let partnerId: String?
+        public let messageID: String?
+        public let partnerID: String?
         public let messageType: Int?
         public let deleteOwner: String?
         public let isLive: Bool?
-        public let roomId: String?
-        public let userId: String?
+        public let roomID: String?
+        public let userID: String?
         public let userName: String?
         public let data: String?
         public let updateDt: String?
@@ -163,7 +163,7 @@ public struct PlayerSocketModel {
     }
     
     public struct LikeModel: Codable {
-        public let roomId: String?
+        public let roomID: String?
         public let value: Int?
     }
 
