@@ -114,6 +114,7 @@ public struct PlayerSocketModel {
         public var streamInfo : String?
         public var title : String?
         public var updateDt : String?
+        public var contact : String?
     }
 
     public struct JoinUser : Codable {
