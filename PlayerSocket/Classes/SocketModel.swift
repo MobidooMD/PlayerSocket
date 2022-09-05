@@ -69,7 +69,7 @@ public struct PlayerSocketModel {
             }
         }
         public func socketRepresentation() -> SocketData {
-            return ["roomId": roomId, "isAdmin": isAdmin, "input": messageInput?.socketRepresentation()]
+            return ["roomId": roomID, "isAdmin": isAdmin, "input": messageInput?.socketRepresentation()]
         }
     }
     
@@ -114,6 +114,7 @@ public struct PlayerSocketModel {
         public var streamInfo : String?
         public var title : String?
         public var updateDt : String?
+        public var contact : String?
     }
 
     public struct JoinUser : Codable {
