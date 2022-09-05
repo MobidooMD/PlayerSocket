@@ -1,6 +1,6 @@
 {
   "name": "PlayerSocket",
-  "version": "0.1.7",
+  "version": "0.2.3",
   "summary": "플레이어 소켓입니다.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/devplaynew/PlayerSocket",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/devplaynew/PlayerSocket.git",
-    "tag": "0.1.7"
+    "tag": "0.2.3"
   },
   "platforms": {
     "ios": "10.0"
@@ -22,9 +22,12 @@
   "swift_versions": "5.0",
   "dependencies": {
     "Socket.IO-Client-Swift": [
-      "~> 14.0.0"
+      "~> 16.0.0"
     ],
     "lottie-ios": [
+
+    ],
+    "SauceLog": [
 
     ]
   },

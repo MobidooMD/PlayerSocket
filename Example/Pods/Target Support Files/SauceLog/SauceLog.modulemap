@@ -1,0 +1,6 @@
+framework module SauceLog {
+  umbrella header "SauceLog-umbrella.h"
+
+  export *
+  module * { export * }
+}

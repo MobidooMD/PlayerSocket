@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PlayerSocket'
-  s.version          = '0.2.0'
+  s.version          = '0.2.7'
   s.summary          = '플레이어 소켓입니다.'
 
 # This description is used to generate tags and improve search results.
@@ -42,6 +42,7 @@ TODO: Add long description of the pod here.
   # 현재 swift 버전
   s.swift_versions = '5.0'
   # WebSocket
-  s.dependency 'Socket.IO-Client-Swift', '~> 14.0.0'
+  s.dependency 'Socket.IO-Client-Swift', '~> 16.0.0'
   s.dependency 'lottie-ios'
+  s.dependency 'SauceLog'
 end
