@@ -23,23 +23,31 @@ class ConnectedVC: UIViewController {
     @IBOutlet weak var purchaseAuthState: UILabel!
     @IBOutlet weak var purchasePicker: UILabel!
     
-    var connectStateCheck = ""
+    var url = String()
+    var token = String()
+    var roomId = String()
+    
+    var socketConnector: PlayerSocketConnector?
+    @IBAction func backAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        socketConnector = PlayerSocketConnector()
         PlayerSocketEventCallback.delegate = self
-        socketConnector?.emitInit()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        socketConnector?.setConnectionInfo(url: url, isSecure: true, reconnect: true, roomId: roomId, showLog: true)
+        socketConnector?.setUserInfo(isAdmin: true, token: token, userId: "")
+        self.onEventRegister()
+        socketConnector?.socketConnect()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     @IBAction func initAction(_ sender: Any) {
-        if connectStateCheck == "connect" {
-            socketConnector?.emitInit()
-        }
+        socketConnector?.emitInit()
     }
     @IBAction func connectedAction(_ sender: Any) {
         socketConnector?.socketConnect()
@@ -49,15 +57,33 @@ class ConnectedVC: UIViewController {
     }
 }
 
+//MARK allback event 연결
 extension ConnectedVC: PlayerSocketEventDelegate {
-    func invalidToken() {
+    func onEventRegister() {
+        socketConnector?.onEventRegister(eventName: "connect", _callback: PlayerSocketEventCallback.onConnect) // 소켓 연결시 들어오는 콜백
+        socketConnector?.onEventRegister(eventName: "error", _callback: PlayerSocketEventCallback.error) // 소켓 연결 fail시 들어오는 콜백
+        socketConnector?.onEventRegister(eventName: "disconnect", _callback: PlayerSocketEventCallback.onDisconnect) // 소켓 끊어지면 들어오는 콜백
+        socketConnector?.onEventRegister(eventName: "statusChange", _callback: PlayerSocketEventCallback.onStatusChange) // 접속상태 업데이트시 들어오는 콜백
+        socketConnector?.onEventRegister(eventName: "init", _callback: PlayerSocketEventCallback.onInit) // 초기화 관련 콜백
+        socketConnector?.onEventRegister(eventName: "getRoom", _callback: PlayerSocketEventCallback.onGetRoom) // getRoom호출시 콜백 (방정보 획득)
     }
     
     func updateConnectionStatus(state: String) {
-        connectStateCheck = state
         connectState.text = state
- 
-        if state == "disconnect" {
+        switch state {
+        case "connect":
+            break
+        case "error":
+            let alert = UIAlertController(title: "ERROR", message: "URL을 확인해주세요", preferredStyle: UIAlertController.Style.alert)
+            let destructiveAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.destructive){(_) in
+                self.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(destructiveAction)
+            self.present(alert, animated: false)
+            break
+        case "stateChage":
+            break
+        case "disconnect":
             self.pvCount.text = ""
             self.likeCount.text = ""
             chatState.text = ""
@@ -67,21 +93,17 @@ extension ConnectedVC: PlayerSocketEventDelegate {
             purchasePicker.text = ""
             roomName.text = ""
             roomIdText.text = ""
+        default:
+            break
         }
     }
     
-    func updateMessage(messages: [PlayerSocket.MessageModel]) {
+    func updateMessage(messages: [PlayerSocketModel.MessageModel]) {
     }
     
-    func updateRoom(updateRoom: PlayerSocket.UpdateRoomModel, isInit: Bool) {
-        if let user = updateRoom.joinUser?.first as? PlayerSocket.JoinUser {
-            print(user)
-        }
-        guard let room = updateRoom.room as? PlayerSocket.Room else {
-           return
-        }
-        connectState.text = "connect"
-        // 뷰 카운트
+    func updateRoom(updateRoom: PlayerSocketModel.UpdateRoomModel, isInit: Bool) {
+        guard let user = updateRoom.joinUser?.first as? PlayerSocketModel.JoinUser, let room = updateRoom.room as? PlayerSocketModel.Room else { return }
+        
         let viewCount = Int(room.incomingCounterInfo ?? 0)
        
         let countK = viewCount / 1000
@@ -98,7 +120,6 @@ extension ConnectedVC: PlayerSocketEventDelegate {
             self.pvCount.text = "\(viewCount)"
         }
 
-        // 좋아요
         let likeCount = Int(room.reactionCounterInfo ?? 0)
         let likeK = likeCount / 1000
         let likeKN = (likeCount % 1000) / 100
@@ -122,17 +143,25 @@ extension ConnectedVC: PlayerSocketEventDelegate {
         roomIdText.text = room.roomId
     }
     
-    func refetchRoom(refetchRoom: PlayerSocket.Room, isInit: Bool) {
+    func refetchRoom(refetchRoom: PlayerSocketModel.Room, isInit: Bool) {
     }
     
-    func updateInit(initModel: PlayerSocket.InitModel) {
+    func updateInit(initModel: PlayerSocketModel.InitModel) {
         let updateRoomKey = initModel.socketUpdateRoomName!
         socketConnector?.onEventRegister(eventName: updateRoomKey, _callback: PlayerSocketEventCallback.onUpdateRoom)
     }
     
-    func chatKinesis(message: PlayerSocket.MessageModel) {
+    func chatKinesis(message: PlayerSocketModel.MessageModel) {
     }
     
-    func likeKinesis(like: PlayerSocket.LikeModel) {
+    func likeKinesis(like: PlayerSocketModel.LikeModel) {
+    }
+    
+    func invalidToken() {
+        let alert = UIAlertController(title: "유효한 토큰이 아닙니다.", message: "token invalidToken", preferredStyle: UIAlertController.Style.alert)
+        let destructiveAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.destructive){(_) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(destructiveAction)
     }
 }
