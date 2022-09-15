@@ -37,8 +37,8 @@ class ConnectedVC: UIViewController {
         socketConnector = PlayerSocketConnector()
         PlayerSocketEventCallback.delegate = self
         
-        socketConnector?.setConnectionInfo(url: url, isSecure: true, reconnect: true, roomId: roomId, showLog: true)
-        socketConnector?.setUserInfo(isAdmin: true, token: token, userId: "")
+        socketConnector?.setConnectionInfo(url: url, isSecure: true, reconnect: true, roomID: roomId, showLog: true)
+        socketConnector?.setUserInfo(isAdmin: true, token: token, userID: "")
         self.onEventRegister()
         socketConnector?.socketConnect()
     }
@@ -140,7 +140,7 @@ extension ConnectedVC: PlayerSocketEventDelegate {
         purchaseAuthState.text =  "\(room.currentPurchase)"
         purchasePicker.text = "\(room.currentWinPurchase)"
         roomName.text = room.title
-        roomIdText.text = room.roomId
+        roomIdText.text = room.roomID
     }
     
     func refetchRoom(refetchRoom: PlayerSocketModel.Room, isInit: Bool) {

@@ -51,7 +51,7 @@ public class PlayerSocketEventCallback {
         
         if let obj = try? JSONDecoder().decode(PlayerSocketModel.InitModel.self, from: responseJson!) {
             delegate?.updateInit(initModel: obj)
-            let model = PlayerSocketModel.UpdateRoomModel(joinUser: obj.joinUser, liveUserCount: obj.liveUserCount, room: obj.room, roomId: obj.room?.roomId)
+            let model = PlayerSocketModel.UpdateRoomModel(joinUser: obj.joinUser, liveUserCount: obj.liveUserCount, room: obj.room, roomID: obj.room?.roomID)
             delegate?.updateRoom(updateRoom: model, isInit: true)
         }
     }
